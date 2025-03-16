@@ -7,31 +7,21 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <div class="container">
-        <h1>Calculator Zile Lucrătoare și Costuri</h1>
-        <form id="calculatorForm">
-            <label for="prezente_luna_trecuta">Număr de prezențe din luna trecută:</label>
-            <input type="number" id="prezente_luna_trecuta" value="0" required><br>
+        <h1>Calculator Zile Lucrătoare și Cost</h1>
 
-            <label for="vacanta_luna_trecuta">Număr de zile de vacanță din luna trecută:</label>
-            <input type="number" id="vacanta_luna_trecuta" value="0"><br>
+        <label for="prezente">Număr de prezențe luna trecută:</label>
+        <input type="number" id="prezente" min="0" placeholder="Introduceți numărul de prezențe">
 
-            <label for="vacanta_luna_curenta">Număr de zile de vacanță pentru luna curentă:</label>
-            <input type="number" id="vacanta_luna_curenta" value="0"><br>
+        <label for="vacanta_trecuta">Zile de vacanță luna trecută:</label>
+        <input type="number" id="vacanta_trecuta" min="0" placeholder="Introduceți zilele de vacanță (opțional)">
 
-            <input type="submit" value="Calculare">
-        </form>
+        <label for="vacanta_curenta">Zile de vacanță luna curentă:</label>
+        <input type="number" id="vacanta_curenta" min="0" placeholder="Introduceți zilele de vacanță (opțional)">
 
-        <div class="results" id="results" style="display: none;">
-            <h3>Rezultate:</h3>
-            <p><span class="result-title">Luna trecută</span>: <span id="zile_lucratoare_luna_trecuta"></span> zile lucrătoare</p>
-            <p><span class="result-title">Prezențe</span>: <span id="prezente_luna_trecuta_res"></span> zile, deci <span class="result-title">Absente</span>: <span id="absente_luna_trecuta"></span> zile</p>
-            <p><span class="result-title">Luna curentă</span>: <span id="zile_lucratoare_luna_curenta"></span> zile lucrătoare în total</p>
-            <p><span class="result-title">Zile de vacanță</span>: <span id="vacanta_luna_curenta_res"></span> zile</p>
-            <p><span class="result-title">Zile de plată</span>: <span id="zile_de_plata"></span></p>
-            <p><span class="result-title">Cost total</span>: <span id="cost_total"></span> lei</p>
-        </div>
+        <button onclick="calculeaza()">Calculează</button>
+
+        <div id="rezultate"></div>
     </div>
 
     <script src="script.js"></script>
