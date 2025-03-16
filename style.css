@@ -15,7 +15,7 @@ body {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 300px;
+    width: 350px;
 }
 
 h1 {
@@ -44,6 +44,7 @@ button {
     border-radius: 5px;
     cursor: pointer;
     width: 100%;
+    margin-top: 10px;
 }
 
 button:hover {
@@ -52,5 +53,17 @@ button:hover {
 
 #rezultate {
     margin-top: 20px;
+    font-weight: bold;
+    background: #e3f2fd;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+#detalii {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
     text-align: left;
+    margin-top: 10px;
 }
