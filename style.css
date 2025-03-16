@@ -20,7 +20,7 @@ body {
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 500px;
+    max-width: 800px; /* Lățime mai mare pentru container */
 }
 
 h1 {
@@ -70,14 +70,15 @@ button:hover {
     margin-top: 20px;
     font-size: 18px;
     font-weight: bold;
-    text-align: center;
+    text-align: left; /* Aliniere la stânga pentru rezultate */
     background-color: #ecf0f1;
     padding: 20px;
     border-radius: 8px;
     border: 2px solid #ddd;
     color: #2c3e50;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    font-family: 'Arial', sans-serif;
+    white-space: nowrap; /* Previne împărțirea pe mai multe linii */
+    overflow-x: auto; /* Permite scroll orizontal dacă textul este prea larg */
 }
 
 .detalii-btn {
@@ -102,4 +103,6 @@ button:hover {
     color: #333;
     border: 1px solid #ccc;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    white-space: nowrap; /* Previne împărțirea pe mai multe linii */
+    overflow-x: auto; /* Permite scroll orizontal */
 }
