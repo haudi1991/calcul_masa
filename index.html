@@ -9,22 +9,48 @@
 <body>
     <div class="container">
         <h1>Calculator Zile Lucrătoare și Cost</h1>
-
-        <label for="prezente">Număr de prezențe luna trecută:</label>
-        <input type="number" id="prezente" min="0" placeholder="Introduceți numărul de prezențe">
-
-        <label for="vacanta_trecuta">Zile de vacanță luna trecută:</label>
-        <input type="number" id="vacanta_trecuta" min="0" placeholder="Introduceți zilele de vacanță (opțional)">
-
-        <label for="vacanta_curenta">Zile de vacanță luna curentă:</label>
-        <input type="number" id="vacanta_curenta" min="0" placeholder="Introduceți zilele de vacanță (opțional)">
-
-        <button onclick="calculeaza()">Calculează</button>
-
-        <div id="rezultate"></div>
-
-        <button id="toggleDetails" onclick="toggleDetalii()" style="display: none;">Afișează detalii</button>
-        <div id="detalii" style="display: none;"></div>
+        
+        <div class="input-group">
+            <label for="prezente">Număr de prezențe luna trecută:</label>
+            <div class="input-container">
+                <input type="number" id="prezente" min="0" value="12" placeholder="Introduceți numărul de prezențe">
+                <div class="spinner">
+                    <button onclick="incrementValue('prezente')">▲</button>
+                    <button onclick="decrementValue('prezente')">▼</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="input-group">
+            <label for="vacanta_trecuta">Zile de vacanță luna trecută:</label>
+            <div class="input-container">
+                <input type="number" id="vacanta_trecuta" min="0" value="6" placeholder="Introduceți zilele de vacanță">
+                <div class="spinner">
+                    <button onclick="incrementValue('vacanta_trecuta')">▲</button>
+                    <button onclick="decrementValue('vacanta_trecuta')">▼</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="input-group">
+            <label for="vacanta_curenta">Zile de vacanță luna curentă:</label>
+            <div class="input-container">
+                <input type="number" id="vacanta_curenta" min="0" value="2" placeholder="Introduceți zilele de vacanță">
+                <div class="spinner">
+                    <button onclick="incrementValue('vacanta_curenta')">▲</button>
+                    <button onclick="decrementValue('vacanta_curenta')">▼</button>
+                </div>
+            </div>
+        </div>
+        
+        <button class="calculate" onclick="calculeaza()">Calculează</button>
+        
+        <div id="rezultat-simplu"></div>
+        <div id="rezultate-detaliate"></div>
+        
+        <footer>
+            © 2025 Calculator Zile Lucrătoare - Toate drepturile rezervate
+        </footer>
     </div>
 
     <script src="script.js"></script>
