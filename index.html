@@ -105,7 +105,7 @@
             <p><span class="result-title">Luna trecută</span>: <span id="zile_lucratoare_luna_trecuta"></span> zile lucrătoare</p>
             <p><span class="result-title">Prezențe</span>: <span id="prezente_luna_trecuta_res"></span> zile, deci <span class="result-title">Absente</span>: <span id="absente_luna_trecuta"></span> zile</p>
             <p><span class="result-title">Luna curentă</span>: <span id="zile_lucratoare_luna_curenta"></span> zile lucrătoare în total</p>
-            <p><span class="result-title">Zile de vacanță</span>: <span id="vacanta_luna_curenta"></span> zile</p>
+            <p><span class="result-title">Zile de vacanță</span>: <span id="vacanta_luna_curenta_res"></span> zile</p>
             <p><span class="result-title">Zile de plată</span>: <span id="zile_de_plata"></span></p>
             <p><span class="result-title">Cost total</span>: <span id="cost_total"></span> lei</p>
         </div>
@@ -113,63 +113,27 @@
 
     <script>
         function numaraZileLucratoare(an, luna) {
-            const primaZi = new Date(an, luna - 1, 1); // Luna începe de la 0 în JavaScript
-            const ultimaZi = new Date(an, luna, 0); // Ultima zi din luna respectivă
+            const primaZi = new Date(an, luna - 1, 1);
+            const ultimaZi = new Date(an, luna, 0);
             let zileLucratoare = 0;
 
             for (let zi = primaZi; zi <= ultimaZi; zi.setDate(zi.getDate() + 1)) {
-                if (zi.getDay() !== 0 && zi.getDay() !== 6) { // Verificăm dacă ziua nu este sâmbătă (6) sau duminică (0)
+                if (zi.getDay() !== 0 && zi.getDay() !== 6) {
                     zileLucratoare++;
                 }
             }
-
             return zileLucratoare;
         }
 
         document.getElementById('calculatorForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Previne reîncărcarea paginii
-
-            // Preluăm datele din formular
+            event.preventDefault();
+            
             const prezenteLunaTrecuta = parseInt(document.getElementById('prezente_luna_trecuta').value) || 0;
             const vacantaLunaTrecuta = parseInt(document.getElementById('vacanta_luna_trecuta').value) || 0;
             const vacantaLunaCurenta = parseInt(document.getElementById('vacanta_luna_curenta').value) || 0;
-
-            const azi = new Date();
-            const anCurent = azi.getFullYear();
-            const lunaCurenta = azi.getMonth() + 1; // Luna începe de la 0 în JavaScript
-
-            // Calculăm luna și anul trecut
-            const lunaTrecuta = lunaCurenta === 1 ? 12 : lunaCurenta - 1;
-            const anTrecut = lunaCurenta === 1 ? anCurent - 1 : anCurent;
-
-            // Calculăm numărul de zile lucrătoare
-            const zileLucratoareLunaTrecuta = numaraZileLucratoare(anTrecut, lunaTrecuta);
-            const zileLucratoareLunaCurenta = numaraZileLucratoare(anCurent, lunaCurenta);
-
-            // Calculăm absențele și zilele de plată
-            const absenteLunaTrecuta = zileLucratoareLunaTrecuta - prezenteLunaTrecuta;
-            let zileDePlata = Math.max(0, zileLucratoareLunaCurenta - absenteLunaTrecuta);
-
-            // Ajustăm zilele lucrătoare pentru luna curentă
-            zileDePlata -= vacantaLunaCurenta;
-
-            // Calculăm costul total
-            const costPeZi = 20;
-            const costTotal = (zileDePlata + vacantaLunaTrecuta) * costPeZi;
-
-            // Afișăm rezultatele
-            document.getElementById('zile_lucratoare_luna_trecuta').innerText = zileLucratoareLunaTrecuta;
-            document.getElementById('prezente_luna_trecuta_res').innerText = prezenteLunaTrecuta;
-            document.getElementById('absente_luna_trecuta').innerText = absenteLunaTrecuta;
-            document.getElementById('zile_lucratoare_luna_curenta').innerText = zileLucratoareLunaCurenta + vacantaLunaCurenta;
-            document.getElementById('vacanta_luna_curenta').innerText = vacantaLunaCurenta;
-            document.getElementById('zile_de_plata').innerText = zileDePlata;
-            document.getElementById('cost_total').innerText = costTotal;
-
-            // Afișăm rezultatele
-            document.getElementById('results').style.display = 'block';
+            
+            document.getElementById('vacanta_luna_curenta_res').innerText = vacantaLunaCurenta;
         });
     </script>
 </body>
 </html>
-
