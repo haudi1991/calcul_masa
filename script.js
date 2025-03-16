@@ -35,7 +35,9 @@ document.getElementById('calculeaza-btn').addEventListener('click', function() {
 
     // Afișarea rezultatului
     const rezultatElement = document.getElementById('rezultat');
-    rezultatElement.innerHTML = `Cost total: ${costTotal} lei`;
+    rezultatElement.innerHTML = `
+        <p><strong>Cost total:</strong> ${costTotal} lei</p>
+    `;
 
     // Afișarea detaliilor suplimentare la apăsarea butonului
     document.getElementById('detalii-btn').style.display = 'block';
@@ -43,11 +45,11 @@ document.getElementById('calculeaza-btn').addEventListener('click', function() {
         const detaliiElement = document.getElementById('detalii');
         detaliiElement.style.display = 'block';
         detaliiElement.innerHTML = `
-            <p>Luna trecută: ${zileLucratoareLunaTrecuta} zile lucrătoare.</p>
-            <p>Prezențe luna trecută: ${prezenteLunaTrecuta} zile, Absențe: ${absenteLunaTrecuta} zile.</p>
-            <p>Luna curentă: ${zileLucratoareLunaCurenta} zile lucrătoare, Zile de vacanță: ${vacantaLunaCurenta}.</p>
-            <p>Zile de plată: ${zileDePlata} zile.</p>
-            <p>Formula utilizată: (Zile de plată + Zile de vacanță luna trecută) * Cost pe zi = ${costTotal} lei</p>
+            <p><strong>Luna trecută:</strong> ${zileLucratoareLunaTrecuta} zile lucrătoare.</p>
+            <p><strong>Prezențe luna trecută:</strong> ${prezenteLunaTrecuta} zile, <strong>Absențe:</strong> ${absenteLunaTrecuta} zile.</p>
+            <p><strong>Luna curentă:</strong> ${zileLucratoareLunaCurenta} zile lucrătoare, <strong>Zile de vacanță:</strong> ${vacantaLunaCurenta}.</p>
+            <p><strong>Zile de plată:</strong> ${zileDePlata} zile.</p>
+            <p><strong>Formula utilizată:</strong> (Zile de plată + Zile de vacanță luna trecută) * Cost pe zi = ${costTotal} lei</p>
         `;
     });
 });
