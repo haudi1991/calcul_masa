@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator Zile Lucrătoare</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        label {
+            font-size: 16px;
+            color: #333;
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .results {
+            margin-top: 30px;
+            background-color: #f1f1f1;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .results p {
+            font-size: 16px;
+            color: #333;
+        }
+
+        .result-title {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Calculator Zile Lucrătoare și Costuri</h1>
+        <form id="calculatorForm">
+            <label for="prezente_luna_trecuta">Număr de prezențe din luna trecută:</label>
+            <input type="number" id="prezente_luna_trecuta" value="0" required><br>
+
+            <label for="vacanta_luna_trecuta">Număr de zile de vacanță din luna trecută:</label>
+            <input type="number" id="vacanta_luna_trecuta" value="0"><br>
+
+            <label for="vacanta_luna_curenta">Număr de zile de vacanță pentru luna curentă:</label>
+            <input type="number" id="vacanta_luna_curenta" value="0"><br>
+
+            <input type="submit" value="Calculare">
+        </form>
+
+        <div class="results" id="results" style="display: none;">
+            <h3>Rezultate:</h3>
+            <p><span class="result-title">Luna trecută</span>: <span id="zile_lucratoare_luna_trecuta"></span> zile lucrătoare</p>
+            <p><span class="result-title">Prezențe</span>: <span id="prezente_luna_trecuta_res"></span> zile, deci <span class="result-title">Absente</span>: <span id="absente_luna_trecuta"></span> zile</p>
+            <p><span class="result-title">Luna curentă</span>: <span id="zile_lucratoare_luna_curenta"></span> zile lucrătoare în total</p>
+            <p><span class="result-title">Zile de vacanță</span>: <span id="vacanta_luna_curenta"></span> zile</p>
+            <p><span class="result-title">Zile de plată</span>: <span id="zile_de_plata"></span></p>
+            <p><span class="result-title">Cost total</span>: <span id="cost_total"></span> lei</p>
+        </div>
+    </div>
+
+    <script>
+        function numaraZileLucratoare(an, luna) {
+            const primaZi = new Date(an, luna - 1, 1); // Luna începe de la 0 în JavaScript
+            const ultimaZi = new Date(an, luna, 0); // Ultima zi din luna respectivă
+            let zileLucratoare = 0;
+
+            for (let zi = primaZi; zi <= ultimaZi; zi.setDate(zi.getDate() + 1)) {
+                if (zi.getDay() !== 0 && zi.getDay() !== 6) { // Verificăm dacă ziua nu este sâmbătă (6) sau duminică (0)
+                    zileLucratoare++;
+                }
+            }
+
+            return zileLucratoare;
+        }
+
+        document.getElementById('calculatorForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Previne reîncărcarea paginii
+
+            // Preluăm datele din formular
+            const prezenteLunaTrecuta = parseInt(document.getElementById('prezente_luna_trecuta').value) || 0;
+            const vacantaLunaTrecuta = parseInt(document.getElementById('vacanta_luna_trecuta').value) || 0;
+            const vacantaLunaCurenta = parseInt(document.getElementById('vacanta_luna_curenta').value) || 0;
+
+            const azi = new Date();
+            const anCurent = azi.getFullYear();
+            const lunaCurenta = azi.getMonth() + 1; // Luna începe de la 0 în JavaScript
+
+            // Calculăm luna și anul trecut
+            const lunaTrecuta = lunaCurenta === 1 ? 12 : lunaCurenta - 1;
+            const anTrecut = lunaCurenta === 1 ? anCurent - 1 : anCurent;
+
+            // Calculăm numărul de zile lucrătoare
+            const zileLucratoareLunaTrecuta = numaraZileLucratoare(anTrecut, lunaTrecuta);
+            const zileLucratoareLunaCurenta = numaraZileLucratoare(anCurent, lunaCurenta);
+
+            // Calculăm absențele și zilele de plată
+            const absenteLunaTrecuta = zileLucratoareLunaTrecuta - prezenteLunaTrecuta;
+            let zileDePlata = Math.max(0, zileLucratoareLunaCurenta - absenteLunaTrecuta);
+
+            // Ajustăm zilele lucrătoare pentru luna curentă
+            zileDePlata -= vacantaLunaCurenta;
+
+            // Calculăm costul total
+            const costPeZi = 20;
+            const costTotal = (zileDePlata + vacantaLunaTrecuta) * costPeZi;
+
+            // Afișăm rezultatele
+            document.getElementById('zile_lucratoare_luna_trecuta').innerText = zileLucratoareLunaTrecuta;
+            document.getElementById('prezente_luna_trecuta_res').innerText = prezenteLunaTrecuta;
+            document.getElementById('absente_luna_trecuta').innerText = absenteLunaTrecuta;
+            document.getElementById('zile_lucratoare_luna_curenta').innerText = zileLucratoareLunaCurenta + vacantaLunaCurenta;
+            document.getElementById('vacanta_luna_curenta').innerText = vacantaLunaCurenta;
+            document.getElementById('zile_de_plata').innerText = zileDePlata;
+            document.getElementById('cost_total').innerText = costTotal;
+
+            // Afișăm rezultatele
+            document.getElementById('results').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
+
