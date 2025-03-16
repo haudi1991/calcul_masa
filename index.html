@@ -4,84 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator Zile Lucrătoare</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .container {
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 600px;
-        }
-
-        h1 {
-            text-align: center;
-            color: #4CAF50;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        label {
-            font-size: 16px;
-            color: #333;
-        }
-
-        input[type="number"] {
-            padding: 10px;
-            font-size: 16px;
-            border: 2px solid #ddd;
-            border-radius: 5px;
-            outline: none;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        input[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
-            font-size: 16px;
-            padding: 12px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-
-        .results {
-            margin-top: 30px;
-            background-color: #f1f1f1;
-            padding: 20px;
-            border-radius: 8px;
-        }
-
-        .results p {
-            font-size: 16px;
-            color: #333;
-        }
-
-        .result-title {
-            font-weight: bold;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -111,29 +34,6 @@
         </div>
     </div>
 
-    <script>
-        function numaraZileLucratoare(an, luna) {
-            const primaZi = new Date(an, luna - 1, 1);
-            const ultimaZi = new Date(an, luna, 0);
-            let zileLucratoare = 0;
-
-            for (let zi = primaZi; zi <= ultimaZi; zi.setDate(zi.getDate() + 1)) {
-                if (zi.getDay() !== 0 && zi.getDay() !== 6) {
-                    zileLucratoare++;
-                }
-            }
-            return zileLucratoare;
-        }
-
-        document.getElementById('calculatorForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            const prezenteLunaTrecuta = parseInt(document.getElementById('prezente_luna_trecuta').value) || 0;
-            const vacantaLunaTrecuta = parseInt(document.getElementById('vacanta_luna_trecuta').value) || 0;
-            const vacantaLunaCurenta = parseInt(document.getElementById('vacanta_luna_curenta').value) || 0;
-            
-            document.getElementById('vacanta_luna_curenta_res').innerText = vacantaLunaCurenta;
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
